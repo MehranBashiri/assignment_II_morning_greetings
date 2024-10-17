@@ -22,7 +22,7 @@
 To install this package, follow these steps:
 
 1. Clone the project:
-    git clone https://github.com/mehranbashiri/assignment_02_morning_greetings.git
+    git clone https://github.com/mehranbashiri/assignment_II_morning_greetings.git
 
 2. Navigate to the project directory and install the package:
     cd assignment_02_morning_greetings
