@@ -1,57 +1,86 @@
-# Morning Greetings
+# Neural Radiance Field (NeRF) for 3D Scene Reconstruction
 
 ## Overview
-**Morning Greetings** is a Python package that automates the process of sending personalized "Good Morning" messages. It allows you to manage contacts, generate custom messages, simulate sending them, and log the message details for future reference.
+**Neural Radiance Field (NeRF)** is a framework for synthesizing novel views of 3D scenes by representing them as continuous volumetric functions. This project implements a streamlined version of NeRF using PyTorch3D to simplify computational requirements while maintaining high-quality rendering capabilities. The models and experiments are provided in a Jupyter Notebook and can be run online or locally.
 
-## Requirements
-- Python 3.6 or higher
-- No external dependencies
+## Running the Code
 
-## Package Structure
-- `morning_greetings/contacts.py`: Manage the contact list (add, update, remove friends).
-- `morning_greetings/message_generator.py`: Generate personalized "Good Morning" messages.
-- `morning_greetings/message_sender.py`: Simulate sending messages.
-- `morning_greetings/logger.py`: Log the details of each message sent.
-- `test_morning_greetings.py`: Unit tests to verify functionality for contact management, message generation, sending, and logging.
-- `main.py`: The main script that integrates all modules and executes the message-sending process.
-- `sent_messages.log`: Log file that stores the history of sent messages.
-- `setup.py`: The setup file for packaging and installation.
+The project is implemented in a Jupyter Notebook (`notebook.ipynb`), which can be executed in:
 
-## Installation
+### Google Colab
+1. Upload the `notebook.ipynb` to [Google Colab](https://colab.research.google.com/).
+2. Follow the prompts in the notebook to install required dependencies.
+3. Execute the cells sequentially to train and evaluate the models.
 
-To install this package, follow these steps:
+### Local Setup
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/your-username/repository-name.git
+    ```
+2. Navigate to the project directory:
+    ```bash
+    cd repository-name
+    ```
+3. Open the Jupyter Notebook locally:
+    ```bash
+    jupyter notebook notebook.ipynb
+    ```
+4. Install required dependencies as specified in the notebook's initial cells.
 
-1. Clone the project:
-    git clone https://github.com/mehranbashiri/assignment_II_morning_greetings.git
+## Dataset
 
-2. Navigate to the project directory and install the package:
-    cd assignment_02_morning_greetings
-    pip install .
+### Clean Cow Dataset
+The clean cow dataset includes rendered views of a 3D cow model with simple, uncluttered backgrounds and binary silhouettes. It provides an idealized baseline for testing Neural Radiance Fields (NeRF) models.
 
-## Usage
+### Complex Noisy Cow Dataset
+To evaluate the robustness of the models, the complex noisy cow dataset introduces challenges such as:
+- Gaussian noise and salt-and-pepper noise.
+- Visual complexities like motion blur, background changes, and color jittering.
 
-1. After installation, navigate to the folder containing `main.py`.
-2. Run the program using:
-    python main.py
+These datasets are automatically downloaded and prepared during notebook execution.
 
-### Managing Contacts
-Use the `ContactManager` class to manage your contacts:
-- Add a friend
-- Update a friend's contact info or greeting time
-- Remove a friend
+## Models
 
-### Reviewing Logs
-All sent messages are recorded in the `sent_messages.log` file. Each entry includes the recipient’s name, contact information, scheduled greeting time, and the message content.
+The project includes six models evaluated on both the clean and complex noisy cow datasets. Each model's results are detailed in the Jupyter Notebook.
 
-## Running Unit Tests
+### Baseline NeRF
+The basic implementation of NeRF with no additional optimizations or extensions. It serves as the starting point for evaluating the effectiveness of enhancements.
 
-To ensure all components are working as expected, run the unit tests:
+### Baseline NeRF + Mixed Precision Training (MPT)
+Incorporates mixed precision training to optimize memory usage and improve training efficiency.
 
-1. Navigate to the project directory.
-2. Execute the test suite with:
-    python test_morning_greetings.py
+### Baseline NeRF + MPT + Early Ray Termination (ERT)
+Adds Early Ray Termination (ERT), which dynamically halts ray sampling for regions that meet density thresholds, reducing computation.
 
-The tests will verify the functionality of contact management, message generation, message sending, and logging.
+### Baseline NeRF + MPT + ERT + Denoising Autoencoder (DAE)
+Introduces a Denoising Autoencoder (DAE) to mitigate noise and improve robustness, especially for complex noisy datasets.
 
-## Author
-- Mehran Bashiri
+### Baseline NeRF + MPT + Multi-View Consistency (MVC)
+Ensures coherence across multiple views of the same scene by enforcing consistency constraints during training.
+
+### Baseline NeRF + MPT + DAE
+Combines Mixed Precision Training and Denoising Autoencoder without ERT or MVC for robust rendering in noisy conditions.
+
+## Results
+The performance of the models is evaluated using the following metrics:
+- **PSNR (Peak Signal-to-Noise Ratio):** Measures pixel-level fidelity.
+- **SSIM (Structural Similarity Index):** Evaluates structural and perceptual similarity.
+- **LPIPS (Learned Perceptual Image Patch Similarity):** Assesses perceptual similarity using learned features.
+
+The results, including comparisons of the six models across both datasets, are presented quantitatively and qualitatively in the Jupyter Notebook and project report.
+
+## Citation
+If you use this project in your research, please cite the following:
+
+```bibtex
+@article{yourcitation,
+  title={Neural Radiance Fields for 3D Scene Reconstruction},
+  author={Your Name},
+  journal={Your Journal},
+  year={2024},
+}
+
+### Key Additions:
+1. **Six models**: Each model is outlined with its features and extensions using Markdown section headers.
+2. Clarification that results are available for both datasets.
+3. Maintained structured Markdown format for seamless copying into `README.md`.
