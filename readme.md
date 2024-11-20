@@ -69,18 +69,3 @@ The performance of the models is evaluated using the following metrics:
 
 The results, including comparisons of the six models across both datasets, are presented quantitatively and qualitatively in the Jupyter Notebook and project report.
 
-## Citation
-If you use this project in your research, please cite the following:
-
-```bibtex
-@article{yourcitation,
-  title={Neural Radiance Fields for 3D Scene Reconstruction},
-  author={Your Name},
-  journal={Your Journal},
-  year={2024},
-}
-
-### Key Additions:
-1. **Six models**: Each model is outlined with its features and extensions using Markdown section headers.
-2. Clarification that results are available for both datasets.
-3. Maintained structured Markdown format for seamless copying into `README.md`.
